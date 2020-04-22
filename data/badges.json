@@ -1,0 +1,471 @@
+[
+  {
+    "name": "Volcano Circuit CCW",
+    "world": "Watopia",
+    "distance": 4.1,
+    "elevation": 17,
+    "xp": 80
+  },
+  {
+    "name": "Volcano Circuit",
+    "world": "Watopia",
+    "distance": 4,
+    "elevation": 17,
+    "xp": 80
+  },
+  {
+    "name": "Queen's Highway",
+    "world": "Yorkshire",
+    "distance": 3,
+    "elevation": 37,
+    "xp": 60
+  },
+  {
+    "name": "Duchy Estate",
+    "world": "Yorkshire",
+    "distance": 3,
+    "elevation": 37,
+    "xp": 60
+  },
+  {
+    "name": "Prefer Flat Roads",
+    "world": "Richmond",
+    "distance": 5,
+    "elevation": 13,
+    "xp": 100
+  },
+  {
+    "name": "Classique",
+    "world": "London",
+    "distance": 5.4,
+    "elevation": 19,
+    "xp": 110
+  },
+  {
+    "name": "The 6 Train",
+    "world": "New York",
+    "distance": 6.4,
+    "elevation": 61,
+    "xp": 130
+  },
+  {
+    "name": "Jungle Circuit",
+    "world": "Watopia",
+    "distance": 7.9,
+    "elevation": 79,
+    "xp": 260
+  },
+  {
+    "name": "Innsbruckring",
+    "world": "Innsbruck",
+    "distance": 8.8,
+    "elevation": 72,
+    "xp": 170
+  },
+  {
+    "name": "Flat Route",
+    "world": "Watopia",
+    "distance": 10.3,
+    "elevation": 54,
+    "xp": 200
+  },
+  {
+    "name": "Greater London Flat",
+    "world": "London",
+    "distance": 11.6,
+    "elevation": 45,
+    "xp": 230
+  },
+  {
+    "name": "Volcano Flat",
+    "world": "Watopia",
+    "distance": 12.3,
+    "elevation": 46,
+    "xp": 240
+  },
+  {
+    "name": "Hilly Route",
+    "world": "Watopia",
+    "distance": 9.1,
+    "elevation": 100,
+    "xp": 180
+  },
+  {
+    "name": "Park Perimeter Loop",
+    "world": "New York",
+    "distance": 9.7,
+    "elevation": 120,
+    "xp": 190
+  },
+  {
+    "name": "Grand Central Circuit",
+    "world": "New York",
+    "distance": 6.8,
+    "elevation": 137,
+    "xp": 140
+  },
+  {
+    "name": "Tempus Fugit",
+    "world": "Watopia",
+    "distance": 17.3,
+    "elevation": 16,
+    "xp": 380
+  },
+  {
+    "name": "Prefer Hilly Roads",
+    "world": "Richmond",
+    "distance": 9.2,
+    "elevation": 126,
+    "xp": 180
+  },
+  {
+    "name": "Tick Tock",
+    "world": "Watopia",
+    "distance": 16.8,
+    "elevation": 44,
+    "xp": 380
+  },
+  {
+    "name": "Astoria Line 8",
+    "world": "New York",
+    "distance": 11.5,
+    "elevation": 129,
+    "xp": 230
+  },
+  {
+    "name": "Whole Lotta Lava",
+    "world": "Watopia",
+    "distance": 12.3,
+    "elevation": 153,
+    "xp": 240
+  },
+  {
+    "name": "The Highline",
+    "world": "New York",
+    "distance": 10.5,
+    "elevation": 175,
+    "xp": 210
+  },
+  {
+    "name": "Tour of Tewit Well",
+    "world": "Yorkshire",
+    "distance": 10.4,
+    "elevation": 200,
+    "xp": 210
+  },
+  {
+    "name": "2015 UCI Worlds Course",
+    "world": "Richmond",
+    "distance": 16.3,
+    "elevation": 142,
+    "xp": 320
+  },
+  {
+    "name": "Lady Liberty",
+    "world": "New York",
+    "distance": 12.3,
+    "elevation": 197,
+    "xp": 240
+  },
+  {
+    "name": "Sand and Sequoias",
+    "world": "Watopia",
+    "distance": 20.2,
+    "elevation": 147,
+    "xp": 400
+  },
+  {
+    "name": "2019 UCI Worlds Harrogate Circuit",
+    "world": "Yorkshire",
+    "distance": 13.8,
+    "elevation": 240,
+    "xp": 270
+  },
+  {
+    "name": "London Loop",
+    "world": "London",
+    "distance": 14.9,
+    "elevation": 220,
+    "xp": 300
+  },
+  {
+    "name": "Greatest London Flat",
+    "world": "London",
+    "distance": 23.6,
+    "elevation": 147,
+    "xp": 500
+  },
+  {
+    "name": "Volcano Climb",
+    "world": "Watopia",
+    "distance": 22.8,
+    "elevation": 192,
+    "xp": 460
+  },
+  {
+    "name": "London 8",
+    "world": "London",
+    "distance": 20.3,
+    "elevation": 238,
+    "xp": 410
+  },
+  {
+    "name": "Greater London Loop",
+    "world": "London",
+    "distance": 21,
+    "elevation": 244,
+    "xp": 420
+  },
+  {
+    "name": "Greater London 8",
+    "world": "London",
+    "distance": 23.8,
+    "elevation": 256,
+    "xp": 480
+  },
+  {
+    "name": "Mighty Metropolitan",
+    "world": "New York",
+    "distance": 20,
+    "elevation": 307,
+    "xp": 400
+  },
+  {
+    "name": "Figure 8 Reverse",
+    "world": "Watopia",
+    "distance": 29.8,
+    "elevation": 234,
+    "xp": 580
+  },
+  {
+    "name": "Figure 8",
+    "world": "Watopia",
+    "distance": 29.8,
+    "elevation": 234,
+    "xp": 580
+  },
+  {
+    "name": "Road to Ruins",
+    "world": "Watopia",
+    "distance": 29.6,
+    "elevation": 268,
+    "xp": 580
+  },
+  {
+    "name": "Knickerbocker Reverse",
+    "world": "New York",
+    "distance": 22.5,
+    "elevation": 346,
+    "xp": 450
+  },
+  {
+    "name": "Knickerbocker",
+    "world": "New York",
+    "distance": 22.5,
+    "elevation": 346,
+    "xp": 450
+  },
+  {
+    "name": "Rising Empire",
+    "world": "New York",
+    "distance": 20.7,
+    "elevation": 362,
+    "xp": 410
+  },
+  {
+    "name": "Greatest London Loop",
+    "world": "London",
+    "distance": 25.6,
+    "elevation": 345,
+    "xp": 510
+  },
+  {
+    "name": "Out and Back Again",
+    "world": "Watopia",
+    "distance": 39.8,
+    "elevation": 303,
+    "xp": 840
+  },
+  {
+    "name": "2018 UCI Worlds Course Short Lap",
+    "world": "Innsbruck",
+    "distance": 23.6,
+    "elevation": 487,
+    "xp": 470
+  },
+  {
+    "name": "Royal Pump Room 8",
+    "world": "Yorkshire",
+    "distance": 27.2,
+    "elevation": 480,
+    "xp": 550
+  },
+  {
+    "name": "Everything Bagel",
+    "world": "New York",
+    "distance": 34.2,
+    "elevation": 525,
+    "xp": 690
+  },
+  {
+    "name": "Triple Loops",
+    "world": "London",
+    "distance": 40.8,
+    "elevation": 544,
+    "xp": 810
+  },
+  {
+    "name": "Mountain Route",
+    "world": "Watopia",
+    "distance": 29.5,
+    "elevation": 671,
+    "xp": 580
+  },
+  {
+    "name": "Big Loop",
+    "world": "Watopia",
+    "distance": 42.4,
+    "elevation": 651,
+    "xp": 840
+  },
+  {
+    "name": "Dust In the Wind",
+    "world": "Watopia",
+    "distance": 54.6,
+    "elevation": 529,
+    "xp": 1080
+  },
+  {
+    "name": "Lutscher",
+    "world": "Innsbruck",
+    "distance": 24.2,
+    "elevation": 823,
+    "xp": 270
+  },
+  {
+    "name": "The London Pretzel",
+    "world": "London",
+    "distance": 55.6,
+    "elevation": 531,
+    "xp": 1100
+  },
+  {
+    "name": "Muir and the Mountain",
+    "world": "Watopia",
+    "distance": 33.9,
+    "elevation": 767,
+    "xp": 680
+  },
+  {
+    "name": "Mountain 8",
+    "world": "Watopia",
+    "distance": 32,
+    "elevation": 677,
+    "xp": 640
+  },
+  {
+    "name": "Bigger Loop",
+    "world": "Watopia",
+    "distance": 53.1,
+    "elevation": 678,
+    "xp": 1060
+  },
+  {
+    "name": "Lutscher CCW",
+    "world": "Innsbruck",
+    "distance": 22.3,
+    "elevation": 821,
+    "xp": 240
+  },
+  {
+    "name": "Surrey Hills",
+    "world": "London",
+    "distance": 44.1,
+    "elevation": 1029,
+    "xp": 820
+  },
+  {
+    "name": "Big Foot Hills",
+    "world": "Watopia",
+    "distance": 67.5,
+    "elevation": 637,
+    "xp": 1340
+  },
+  {
+    "name": "Three Sisters",
+    "world": "Watopia",
+    "distance": 47.8,
+    "elevation": 879,
+    "xp": 950
+  },
+  {
+    "name": "Road to Sky",
+    "world": "Watopia",
+    "distance": 17.3,
+    "elevation": 1045,
+    "xp": 380
+  },
+  {
+    "name": "Achterbahn",
+    "world": "Innsbruck",
+    "distance": 47.38,
+    "elevation": 973,
+    "xp": 950
+  },
+  {
+    "name": "Tour of Fire and Ice",
+    "world": "Watopia",
+    "distance": 25,
+    "elevation": 1161,
+    "xp": 500
+  },
+  {
+    "name": "The PRL Half",
+    "world": "London",
+    "distance": 69,
+    "elevation": 954,
+    "xp": 1380
+  },
+  {
+    "name": "The Pretzel",
+    "world": "Watopia",
+    "distance": 72.2,
+    "elevation": 1333,
+    "xp": 1440
+  },
+  {
+    "name": "Quatch Quest",
+    "world": "Watopia",
+    "distance": 45.9,
+    "elevation": 1683,
+    "xp": 920
+  },
+  {
+    "name": "The Mega Pretzel",
+    "world": "Watopia",
+    "distance": 107,
+    "elevation": 1642,
+    "xp": 2140
+  },
+  {
+    "name": "Four Horsemen",
+    "world": "Watopia",
+    "distance": 89.3,
+    "elevation": 2112,
+    "xp": 1780
+  },
+  {
+    "name": "The Über Pretzel",
+    "world": "Watopia",
+    "distance": 128.3,
+    "elevation": 2335,
+    "xp": 2560
+  },
+  {
+    "name": "The PRL Full",
+    "world": "London",
+    "distance": 173,
+    "elevation": 2496,
+    "xp": 3460
+  }
+]

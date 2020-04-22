@@ -1,0 +1,16 @@
+{
+  "name": "zwift-badge-checklist",
+  "version": "3.0.0",
+  "description": "",
+  "keywords": [],
+  "homepage": "https://codesandbox.io/s/4j7m47vlm4",
+  "main": "index.js",
+  "dependencies": {
+    "react-dom": "latest",
+    "react": "latest",
+    "prop-types": "latest",
+    "clsx": "latest",
+    "@material-ui/icons": "latest",
+    "@material-ui/core": "latest"
+  }
+}
