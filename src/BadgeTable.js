@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import { lighten, makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -59,13 +58,13 @@ const headCells = [
     id: 'distance',
     numeric: true,
     disablePadding: false,
-    label: 'Distance (km)',
+    label: 'Distance',
   },
   {
     id: 'elevation',
     numeric: true,
     disablePadding: false,
-    label: 'Elevation (m)',
+    label: 'Elevation',
   },
   {
     id: 'xp',
@@ -122,37 +121,10 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
-const useToolbarStyles = makeStyles(theme => ({
-  root: {
-    paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(1),
-  },
-  highlight:
-    theme.palette.type === 'light'
-      ? {
-          color: theme.palette.secondary.main,
-          backgroundColor: lighten(theme.palette.secondary.light, 0.85),
-        }
-      : {
-          color: theme.palette.text.primary,
-          backgroundColor: theme.palette.secondary.dark,
-        },
-  title: {
-    flex: '1 1 100%',
-  },
-}));
-
 const EnhancedTableToolbar = props => {
-  const classes = useToolbarStyles();
-
   return (
-    <Toolbar className={clsx(classes.root)}>
-      <Typography
-        className={classes.title}
-        variant="h6"
-        id="tableTitle"
-        component="div"
-      >
+    <Toolbar>
+      <Typography variant="h6" id="tableTitle" component="div">
         Zwift Badges
       </Typography>
     </Toolbar>
@@ -168,11 +140,11 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
   },
   paper: {
-    width: '100%',
+    maxWidth: 1060,
     marginBottom: theme.spacing(2),
   },
   table: {
-    minWidth: 750,
+    minWidth: 510,
   },
   visuallyHidden: {
     border: 0,
@@ -272,8 +244,8 @@ export default function BadgeTable() {
                         {badge.name}
                       </TableCell>
                       <TableCell>{badge.world}</TableCell>
-                      <TableCell align="right">{badge.distance}</TableCell>
-                      <TableCell align="right">{badge.elevation}</TableCell>
+                      <TableCell align="right">{badge.distance} km</TableCell>
+                      <TableCell align="right">{badge.elevation} m</TableCell>
                       <TableCell align="right">{badge.xp}</TableCell>
                     </TableRow>
                   );
