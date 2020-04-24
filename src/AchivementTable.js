@@ -90,7 +90,11 @@ function EnhancedPageHead(props) {
     <div>
       <Toolbar>
         <Typography variant="h6" id="tableTitle" component="div">
-          Zwift Badges
+          Zwift Route Badges
+          <Typography variant="subtitle1">
+            {props.coursesDone} {props.coursesDone === 1 ? 'badge' : 'badges'}
+            {' unlocked '}
+          </Typography>
         </Typography>
       </Toolbar>
       <LinearProgress
@@ -101,6 +105,13 @@ function EnhancedPageHead(props) {
     </div>
   );
 }
+
+EnhancedPageHead.propTypes = {
+  totalCourses: PropTypes.object.isRequired,
+  coursesDone: PropTypes.object.isRequired,
+  totalXp: PropTypes.object.isRequired,
+  xp: PropTypes.object.isRequired,
+};
 
 function EnhancedTableHead(props) {
   const { classes, order, orderBy, onRequestSort } = props;
@@ -152,6 +163,8 @@ EnhancedTableHead.propTypes = {
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
+    paddingTop: 15,
+    paddingBottom: 15,
   },
   paper: {
     maxWidth: 1060,
@@ -211,17 +224,23 @@ export default function BadgeTable() {
 
   const isSelected = name => selected.indexOf(name) !== -1;
 
+  const totalCourses = data.length;
+  const coursesDone = selected.length;
+
+  const totalXp = data.reduce((tXp, achmnt) => tXp + achmnt.xp, 0);
+  const xp = data
+    .filter(achmnt => isSelected(achmnt.name))
+    .reduce((tXp, achmnt) => tXp + achmnt.xp, 0);
+
   return (
     <div className={classes.root}>
       <Paper elevation={3} className={classes.paper}>
         <EnhancedPageHead
-          totalXp={data.reduce(
-            (totalXP, achivement) => totalXP + achivement.xp,
-            0,
-          )}
-          xp={data
-            .filter(achivement => isSelected(achivement.name))
-            .reduce((totalXP, achivement) => totalXP + achivement.xp, 0)}
+          className={classes.pageHead}
+          totalCourses={totalCourses}
+          coursesDone={coursesDone}
+          totalXp={totalXp}
+          xp={xp}
         />
 
         <TableContainer>
@@ -272,10 +291,10 @@ export default function BadgeTable() {
                       </TableCell>
                       <TableCell>{achivement.world}</TableCell>
                       <TableCell align="right">
-                        {achivement.distance} km
+                        {achivement.distance}km
                       </TableCell>
                       <TableCell align="right">
-                        {achivement.elevation} m
+                        {achivement.elevation}m
                       </TableCell>
                       <TableCell align="right">{achivement.xp}</TableCell>
                     </TableRow>
