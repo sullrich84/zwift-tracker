@@ -1,9 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import BadgeTable from './src/BadgeTable';
+import AchivementTable from './src/AchivementTable';
+import Container from '@material-ui/core/Container';
 
 function App() {
-  return <BadgeTable />;
+  return (
+    <Container maxWidth="md">
+      <AchivementTable />
+    </Container>
+  );
 }
 
 ReactDOM.render(<App />, document.querySelector('#app'));

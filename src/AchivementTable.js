@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import { lighten, makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -11,10 +10,21 @@ import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import LinearProgress from '@material-ui/core/LinearProgress';
 import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
+import { readString } from 'react-papaparse';
+import useLocalStorage from './StorageHook';
 
-import data from '../data/badges.json';
+import csvFile from '../data/achivements.csv';
+
+const csvData = readString(csvFile, {
+  header: true,
+  delimiter: ', ',
+  dynamicTyping: true,
+});
+
+const data = csvData.data;
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -59,13 +69,13 @@ const headCells = [
     id: 'distance',
     numeric: true,
     disablePadding: false,
-    label: 'Distance (km)',
+    label: 'Distance',
   },
   {
     id: 'elevation',
     numeric: true,
     disablePadding: false,
-    label: 'Elevation (m)',
+    label: 'Elevation',
   },
   {
     id: 'xp',
@@ -74,6 +84,23 @@ const headCells = [
     label: 'XP',
   },
 ];
+
+function EnhancedPageHead(props) {
+  return (
+    <div>
+      <Toolbar>
+        <Typography variant="h6" id="tableTitle" component="div">
+          Zwift Badges
+        </Typography>
+      </Toolbar>
+      <LinearProgress
+        variant="determinate"
+        color="secondary"
+        value={(props.xp / props.totalXp) * 100}
+      />
+    </div>
+  );
+}
 
 function EnhancedTableHead(props) {
   const { classes, order, orderBy, onRequestSort } = props;
@@ -122,57 +149,19 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
-const useToolbarStyles = makeStyles(theme => ({
-  root: {
-    paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(1),
-  },
-  highlight:
-    theme.palette.type === 'light'
-      ? {
-          color: theme.palette.secondary.main,
-          backgroundColor: lighten(theme.palette.secondary.light, 0.85),
-        }
-      : {
-          color: theme.palette.text.primary,
-          backgroundColor: theme.palette.secondary.dark,
-        },
-  title: {
-    flex: '1 1 100%',
-  },
-}));
-
-const EnhancedTableToolbar = props => {
-  const classes = useToolbarStyles();
-
-  return (
-    <Toolbar className={clsx(classes.root)}>
-      <Typography
-        className={classes.title}
-        variant="h6"
-        id="tableTitle"
-        component="div"
-      >
-        Zwift Badges
-      </Typography>
-    </Toolbar>
-  );
-};
-
-EnhancedTableToolbar.propTypes = {
-  numSelected: PropTypes.number.isRequired,
-};
-
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
   },
   paper: {
-    width: '100%',
+    maxWidth: 1060,
     marginBottom: theme.spacing(2),
   },
   table: {
-    minWidth: 750,
+    minWidth: 510,
+  },
+  tableRow: {
+    cursor: 'pointer',
   },
   visuallyHidden: {
     border: 0,
@@ -191,7 +180,7 @@ export default function BadgeTable() {
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState();
-  const [selected, setSelected] = React.useState([]);
+  const [selected, setSelected] = useLocalStorage('selection', {});
   const [dense] = React.useState(false);
 
   const handleRequestSort = (event, property) => {
@@ -224,11 +213,20 @@ export default function BadgeTable() {
 
   return (
     <div className={classes.root}>
-      <Paper className={classes.paper}>
-        <EnhancedTableToolbar numSelected={selected.length} />
+      <Paper elevation={3} className={classes.paper}>
+        <EnhancedPageHead
+          totalXp={data.reduce(
+            (totalXP, achivement) => totalXP + achivement.xp,
+            0,
+          )}
+          xp={data
+            .filter(achivement => isSelected(achivement.name))
+            .reduce((totalXP, achivement) => totalXP + achivement.xp, 0)}
+        />
+
         <TableContainer>
           <Table
-            className={classes.table}
+            className={classes}
             aria-labelledby="tableTitle"
             size={dense ? 'small' : 'medium'}
             aria-label="enhanced table"
@@ -243,18 +241,19 @@ export default function BadgeTable() {
             />
             <TableBody>
               {stableSort(data, getComparator(order, orderBy)).map(
-                (badge, index) => {
-                  const isItemSelected = isSelected(badge.name);
+                (achivement, index) => {
+                  const isItemSelected = isSelected(achivement.name);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
                     <TableRow
                       hover
-                      onClick={event => handleClick(event, badge.name)}
+                      className={classes.tableRow}
+                      onClick={event => handleClick(event, achivement.name)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={badge.name}
+                      key={achivement.name}
                       selected={isItemSelected}
                     >
                       <TableCell padding="checkbox">
@@ -269,12 +268,16 @@ export default function BadgeTable() {
                         scope="row"
                         padding="none"
                       >
-                        {badge.name}
+                        {achivement.name}
                       </TableCell>
-                      <TableCell>{badge.world}</TableCell>
-                      <TableCell align="right">{badge.distance}</TableCell>
-                      <TableCell align="right">{badge.elevation}</TableCell>
-                      <TableCell align="right">{badge.xp}</TableCell>
+                      <TableCell>{achivement.world}</TableCell>
+                      <TableCell align="right">
+                        {achivement.distance} km
+                      </TableCell>
+                      <TableCell align="right">
+                        {achivement.elevation} m
+                      </TableCell>
+                      <TableCell align="right">{achivement.xp}</TableCell>
                     </TableRow>
                   );
                 },

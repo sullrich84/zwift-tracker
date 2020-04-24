@@ -1,16 +1,16 @@
 {
-  "name": "zwift-badge-checklist",
+  "name": "zwift-badge-tracker",
   "version": "3.0.0",
   "description": "",
   "keywords": [],
-  "homepage": "https://codesandbox.io/s/4j7m47vlm4",
   "main": "index.js",
   "dependencies": {
-    "react-dom": "latest",
-    "react": "latest",
-    "prop-types": "latest",
-    "clsx": "latest",
+    "@material-ui/core": "latest",
     "@material-ui/icons": "latest",
-    "@material-ui/core": "latest"
+    "clsx": "latest",
+    "prop-types": "latest",
+    "react": "latest",
+    "react-dom": "16.13.1",
+    "react-papaparse": "3.1.0"
   }
 }
