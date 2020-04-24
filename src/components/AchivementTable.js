@@ -92,7 +92,7 @@ function EnhancedPageHead(props) {
         <Typography variant="h6" id="tableTitle" component="div">
           Zwift Route Badges
           <Typography variant="subtitle1">
-            {props.coursesDone} {props.coursesDone === 1 ? "badge" : "badges"}
+            {props.courses} {props.courses === 1 ? "badge" : "badges"}
             {" unlocked "}
           </Typography>
         </Typography>
@@ -107,8 +107,7 @@ function EnhancedPageHead(props) {
 }
 
 EnhancedPageHead.propTypes = {
-  totalCourses: PropTypes.object.isRequired,
-  coursesDone: PropTypes.object.isRequired,
+  courses: PropTypes.object.isRequired,
   totalXp: PropTypes.object.isRequired,
   xp: PropTypes.object.isRequired,
 };
@@ -223,9 +222,7 @@ export default function BadgeTable() {
   };
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
-
-  const totalCourses = data.length;
-  const coursesDone = selected.length;
+  const courses = selected.length;
 
   const totalXp = data.reduce((tXp, achmnt) => tXp + achmnt.xp, 0);
   const xp = data
@@ -237,8 +234,7 @@ export default function BadgeTable() {
       <Paper elevation={3} className={classes.paper}>
         <EnhancedPageHead
           className={classes.pageHead}
-          totalCourses={totalCourses}
-          coursesDone={coursesDone}
+          courses={courses}
           totalXp={totalXp}
           xp={xp}
         />
