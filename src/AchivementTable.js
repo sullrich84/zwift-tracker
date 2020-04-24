@@ -1,19 +1,30 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import TableSortLabel from '@material-ui/core/TableSortLabel';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
-import Checkbox from '@material-ui/core/Checkbox';
+import React from "react";
+import PropTypes from "prop-types";
+import { makeStyles } from "@material-ui/core/styles";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import TableSortLabel from "@material-ui/core/TableSortLabel";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import LinearProgress from "@material-ui/core/LinearProgress";
+import Paper from "@material-ui/core/Paper";
+import Checkbox from "@material-ui/core/Checkbox";
+import { readString } from "react-papaparse";
+import useLocalStorage from "./StorageHook";
 
-import data from '../data/badges.json';
+import csvFile from "../data/achivements.csv";
+
+const csvData = readString(csvFile, {
+  header: true,
+  delimiter: ", ",
+  dynamicTyping: true,
+});
+
+const data = csvData.data;
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -26,7 +37,7 @@ function descendingComparator(a, b, orderBy) {
 }
 
 function getComparator(order, orderBy) {
-  return order === 'desc'
+  return order === "desc"
     ? (a, b) => descendingComparator(a, b, orderBy)
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
@@ -38,46 +49,74 @@ function stableSort(array, comparator) {
     if (order !== 0) return order;
     return a[1] - b[1];
   });
-  return stabilizedThis.map(el => el[0]);
+  return stabilizedThis.map((el) => el[0]);
 }
 
 const headCells = [
   {
-    id: 'name',
+    id: "name",
     numeric: false,
     disablePadding: true,
-    label: 'Course',
+    label: "Course",
   },
   {
-    id: 'world',
+    id: "world",
     numeric: false,
     disablePadding: false,
-    label: 'World',
+    label: "World",
   },
   {
-    id: 'distance',
+    id: "distance",
     numeric: true,
     disablePadding: false,
-    label: 'Distance',
+    label: "Distance",
   },
   {
-    id: 'elevation',
+    id: "elevation",
     numeric: true,
     disablePadding: false,
-    label: 'Elevation',
+    label: "Elevation",
   },
   {
-    id: 'xp',
+    id: "xp",
     numeric: true,
     disablePadding: false,
-    label: 'XP',
+    label: "XP",
   },
 ];
+
+function EnhancedPageHead(props) {
+  return (
+    <div>
+      <Toolbar>
+        <Typography variant="h6" id="tableTitle" component="div">
+          Zwift Route Badges
+          <Typography variant="subtitle1">
+            {props.coursesDone} {props.coursesDone === 1 ? "badge" : "badges"}
+            {" unlocked "}
+          </Typography>
+        </Typography>
+      </Toolbar>
+      <LinearProgress
+        variant="determinate"
+        color="secondary"
+        value={(props.xp / props.totalXp) * 100}
+      />
+    </div>
+  );
+}
+
+EnhancedPageHead.propTypes = {
+  totalCourses: PropTypes.object.isRequired,
+  coursesDone: PropTypes.object.isRequired,
+  totalXp: PropTypes.object.isRequired,
+  xp: PropTypes.object.isRequired,
+};
 
 function EnhancedTableHead(props) {
   const { classes, order, orderBy, onRequestSort } = props;
 
-  const createSortHandler = property => event => {
+  const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
 
@@ -85,22 +124,22 @@ function EnhancedTableHead(props) {
     <TableHead>
       <TableRow>
         <TableCell padding="checkbox" />
-        {headCells.map(headCell => (
+        {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
-            align={headCell.numeric ? 'right' : 'left'}
-            padding={headCell.disablePadding ? 'none' : 'default'}
+            align={headCell.numeric ? "right" : "left"}
+            padding={headCell.disablePadding ? "none" : "default"}
             sortDirection={orderBy === headCell.id ? order : false}
           >
             <TableSortLabel
               active={orderBy === headCell.id}
-              direction={orderBy === headCell.id ? order : 'asc'}
+              direction={orderBy === headCell.id ? order : "asc"}
               onClick={createSortHandler(headCell.id)}
             >
               {headCell.label}
               {orderBy === headCell.id ? (
                 <span className={classes.visuallyHidden}>
-                  {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
+                  {order === "desc" ? "sorted descending" : "sorted ascending"}
                 </span>
               ) : null}
             </TableSortLabel>
@@ -116,28 +155,16 @@ EnhancedTableHead.propTypes = {
   numSelected: PropTypes.number.isRequired,
   onRequestSort: PropTypes.func.isRequired,
   onSelectAllClick: PropTypes.func.isRequired,
-  order: PropTypes.oneOf(['asc', 'desc']).isRequired,
+  order: PropTypes.oneOf(["asc", "desc"]).isRequired,
   orderBy: PropTypes.string.isRequired,
   rowCount: PropTypes.number.isRequired,
 };
 
-const EnhancedTableToolbar = props => {
-  return (
-    <Toolbar>
-      <Typography variant="h6" id="tableTitle" component="div">
-        Zwift Badges
-      </Typography>
-    </Toolbar>
-  );
-};
-
-EnhancedTableToolbar.propTypes = {
-  numSelected: PropTypes.number.isRequired,
-};
-
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    width: '100%',
+    width: "100%",
+    paddingTop: 15,
+    paddingBottom: 15,
   },
   paper: {
     maxWidth: 1060,
@@ -146,14 +173,17 @@ const useStyles = makeStyles(theme => ({
   table: {
     minWidth: 510,
   },
+  tableRow: {
+    cursor: "pointer",
+  },
   visuallyHidden: {
     border: 0,
-    clip: 'rect(0 0 0 0)',
+    clip: "rect(0 0 0 0)",
     height: 1,
     margin: -1,
-    overflow: 'hidden',
+    overflow: "hidden",
     padding: 0,
-    position: 'absolute',
+    position: "absolute",
     top: 20,
     width: 1,
   },
@@ -161,14 +191,14 @@ const useStyles = makeStyles(theme => ({
 
 export default function BadgeTable() {
   const classes = useStyles();
-  const [order, setOrder] = React.useState('asc');
+  const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState();
-  const [selected, setSelected] = React.useState([]);
+  const [selected, setSelected] = useLocalStorage("selection", {});
   const [dense] = React.useState(false);
 
   const handleRequestSort = (event, property) => {
-    const isAsc = orderBy === property && order === 'asc';
-    setOrder(isAsc ? 'desc' : 'asc');
+    const isAsc = orderBy === property && order === "asc";
+    setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
   };
 
@@ -185,24 +215,39 @@ export default function BadgeTable() {
     } else if (selectedIndex > 0) {
       newSelected = newSelected.concat(
         selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1),
+        selected.slice(selectedIndex + 1)
       );
     }
 
     setSelected(newSelected);
   };
 
-  const isSelected = name => selected.indexOf(name) !== -1;
+  const isSelected = (name) => selected.indexOf(name) !== -1;
+
+  const totalCourses = data.length;
+  const coursesDone = selected.length;
+
+  const totalXp = data.reduce((tXp, achmnt) => tXp + achmnt.xp, 0);
+  const xp = data
+    .filter((achmnt) => isSelected(achmnt.name))
+    .reduce((tXp, achmnt) => tXp + achmnt.xp, 0);
 
   return (
     <div className={classes.root}>
-      <Paper className={classes.paper}>
-        <EnhancedTableToolbar numSelected={selected.length} />
+      <Paper elevation={3} className={classes.paper}>
+        <EnhancedPageHead
+          className={classes.pageHead}
+          totalCourses={totalCourses}
+          coursesDone={coursesDone}
+          totalXp={totalXp}
+          xp={xp}
+        />
+
         <TableContainer>
           <Table
-            className={classes.table}
+            className={classes}
             aria-labelledby="tableTitle"
-            size={dense ? 'small' : 'medium'}
+            size={dense ? "small" : "medium"}
             aria-label="enhanced table"
           >
             <EnhancedTableHead
@@ -215,24 +260,25 @@ export default function BadgeTable() {
             />
             <TableBody>
               {stableSort(data, getComparator(order, orderBy)).map(
-                (badge, index) => {
-                  const isItemSelected = isSelected(badge.name);
+                (achivement, index) => {
+                  const isItemSelected = isSelected(achivement.name);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
                     <TableRow
                       hover
-                      onClick={event => handleClick(event, badge.name)}
+                      className={classes.tableRow}
+                      onClick={(event) => handleClick(event, achivement.name)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={badge.name}
+                      key={achivement.name}
                       selected={isItemSelected}
                     >
                       <TableCell padding="checkbox">
                         <Checkbox
                           checked={isItemSelected}
-                          inputProps={{ 'aria-labelledby': labelId }}
+                          inputProps={{ "aria-labelledby": labelId }}
                         />
                       </TableCell>
                       <TableCell
@@ -241,15 +287,19 @@ export default function BadgeTable() {
                         scope="row"
                         padding="none"
                       >
-                        {badge.name}
+                        {achivement.name}
                       </TableCell>
-                      <TableCell>{badge.world}</TableCell>
-                      <TableCell align="right">{badge.distance} km</TableCell>
-                      <TableCell align="right">{badge.elevation} m</TableCell>
-                      <TableCell align="right">{badge.xp}</TableCell>
+                      <TableCell>{achivement.world}</TableCell>
+                      <TableCell align="right">
+                        {achivement.distance}km
+                      </TableCell>
+                      <TableCell align="right">
+                        {achivement.elevation}m
+                      </TableCell>
+                      <TableCell align="right">{achivement.xp}</TableCell>
                     </TableRow>
                   );
-                },
+                }
               )}
             </TableBody>
           </Table>

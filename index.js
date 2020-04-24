@@ -1,9 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import BadgeTable from './src/BadgeTable';
+import AchivementTable from './src/AchivementTable';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Container from '@material-ui/core/Container';
 
 function App() {
-  return <BadgeTable />;
+  return (
+    <Container maxWidth="md">
+      <CssBaseline />
+      <AchivementTable />
+    </Container>
+  );
 }
 
 ReactDOM.render(<App />, document.querySelector('#app'));
