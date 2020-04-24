@@ -1,26 +1,26 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import TableSortLabel from '@material-ui/core/TableSortLabel';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import LinearProgress from '@material-ui/core/LinearProgress';
-import Paper from '@material-ui/core/Paper';
-import Checkbox from '@material-ui/core/Checkbox';
-import { readString } from 'react-papaparse';
-import useLocalStorage from './StorageHook';
+import React from "react";
+import PropTypes from "prop-types";
+import { makeStyles } from "@material-ui/core/styles";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import TableSortLabel from "@material-ui/core/TableSortLabel";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import LinearProgress from "@material-ui/core/LinearProgress";
+import Paper from "@material-ui/core/Paper";
+import Checkbox from "@material-ui/core/Checkbox";
+import { readString } from "react-papaparse";
+import useLocalStorage from "./StorageHook";
 
-import csvFile from '../../data/achivements.csv';
+import csvFile from "../data/achivements.csv";
 
 const csvData = readString(csvFile, {
   header: true,
-  delimiter: ', ',
+  delimiter: ", ",
   dynamicTyping: true,
 });
 
@@ -37,7 +37,7 @@ function descendingComparator(a, b, orderBy) {
 }
 
 function getComparator(order, orderBy) {
-  return order === 'desc'
+  return order === "desc"
     ? (a, b) => descendingComparator(a, b, orderBy)
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
@@ -49,39 +49,39 @@ function stableSort(array, comparator) {
     if (order !== 0) return order;
     return a[1] - b[1];
   });
-  return stabilizedThis.map(el => el[0]);
+  return stabilizedThis.map((el) => el[0]);
 }
 
 const headCells = [
   {
-    id: 'name',
+    id: "name",
     numeric: false,
     disablePadding: true,
-    label: 'Course',
+    label: "Course",
   },
   {
-    id: 'world',
+    id: "world",
     numeric: false,
     disablePadding: false,
-    label: 'World',
+    label: "World",
   },
   {
-    id: 'distance',
+    id: "distance",
     numeric: true,
     disablePadding: false,
-    label: 'Distance',
+    label: "Distance",
   },
   {
-    id: 'elevation',
+    id: "elevation",
     numeric: true,
     disablePadding: false,
-    label: 'Elevation',
+    label: "Elevation",
   },
   {
-    id: 'xp',
+    id: "xp",
     numeric: true,
     disablePadding: false,
-    label: 'XP',
+    label: "XP",
   },
 ];
 
@@ -92,8 +92,8 @@ function EnhancedPageHead(props) {
         <Typography variant="h6" id="tableTitle" component="div">
           Zwift Route Badges
           <Typography variant="subtitle1">
-            {props.courses} {props.courses === 1 ? 'badge' : 'badges'}
-            {' unlocked '}
+            {props.courses} {props.courses === 1 ? "badge" : "badges"}
+            {" unlocked "}
           </Typography>
         </Typography>
       </Toolbar>
@@ -115,7 +115,7 @@ EnhancedPageHead.propTypes = {
 function EnhancedTableHead(props) {
   const { classes, order, orderBy, onRequestSort } = props;
 
-  const createSortHandler = property => event => {
+  const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
 
@@ -123,22 +123,22 @@ function EnhancedTableHead(props) {
     <TableHead>
       <TableRow>
         <TableCell padding="checkbox" />
-        {headCells.map(headCell => (
+        {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
-            align={headCell.numeric ? 'right' : 'left'}
-            padding={headCell.disablePadding ? 'none' : 'default'}
+            align={headCell.numeric ? "right" : "left"}
+            padding={headCell.disablePadding ? "none" : "default"}
             sortDirection={orderBy === headCell.id ? order : false}
           >
             <TableSortLabel
               active={orderBy === headCell.id}
-              direction={orderBy === headCell.id ? order : 'asc'}
+              direction={orderBy === headCell.id ? order : "asc"}
               onClick={createSortHandler(headCell.id)}
             >
               {headCell.label}
               {orderBy === headCell.id ? (
                 <span className={classes.visuallyHidden}>
-                  {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
+                  {order === "desc" ? "sorted descending" : "sorted ascending"}
                 </span>
               ) : null}
             </TableSortLabel>
@@ -154,14 +154,14 @@ EnhancedTableHead.propTypes = {
   numSelected: PropTypes.number.isRequired,
   onRequestSort: PropTypes.func.isRequired,
   onSelectAllClick: PropTypes.func.isRequired,
-  order: PropTypes.oneOf(['asc', 'desc']).isRequired,
+  order: PropTypes.oneOf(["asc", "desc"]).isRequired,
   orderBy: PropTypes.string.isRequired,
   rowCount: PropTypes.number.isRequired,
 };
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    width: '100%',
+    width: "100%",
     paddingTop: 15,
     paddingBottom: 15,
   },
@@ -173,16 +173,16 @@ const useStyles = makeStyles(theme => ({
     minWidth: 510,
   },
   tableRow: {
-    cursor: 'pointer',
+    cursor: "pointer",
   },
   visuallyHidden: {
     border: 0,
-    clip: 'rect(0 0 0 0)',
+    clip: "rect(0 0 0 0)",
     height: 1,
     margin: -1,
-    overflow: 'hidden',
+    overflow: "hidden",
     padding: 0,
-    position: 'absolute',
+    position: "absolute",
     top: 20,
     width: 1,
   },
@@ -190,14 +190,14 @@ const useStyles = makeStyles(theme => ({
 
 export default function BadgeTable() {
   const classes = useStyles();
-  const [order, setOrder] = React.useState('asc');
+  const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState();
-  const [selected, setSelected] = useLocalStorage('selection', {});
+  const [selected, setSelected] = useLocalStorage("selection", {});
   const [dense] = React.useState(false);
 
   const handleRequestSort = (event, property) => {
-    const isAsc = orderBy === property && order === 'asc';
-    setOrder(isAsc ? 'desc' : 'asc');
+    const isAsc = orderBy === property && order === "asc";
+    setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
   };
 
@@ -214,19 +214,19 @@ export default function BadgeTable() {
     } else if (selectedIndex > 0) {
       newSelected = newSelected.concat(
         selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1),
+        selected.slice(selectedIndex + 1)
       );
     }
 
     setSelected(newSelected);
   };
 
-  const isSelected = name => selected.indexOf(name) !== -1;
+  const isSelected = (name) => selected.indexOf(name) !== -1;
   const courses = selected.length;
 
   const totalXp = data.reduce((tXp, achmnt) => tXp + achmnt.xp, 0);
   const xp = data
-    .filter(achmnt => isSelected(achmnt.name))
+    .filter((achmnt) => isSelected(achmnt.name))
     .reduce((tXp, achmnt) => tXp + achmnt.xp, 0);
 
   return (
@@ -243,7 +243,7 @@ export default function BadgeTable() {
           <Table
             className={classes}
             aria-labelledby="tableTitle"
-            size={dense ? 'small' : 'medium'}
+            size={dense ? "small" : "medium"}
             aria-label="enhanced table"
           >
             <EnhancedTableHead
@@ -264,7 +264,7 @@ export default function BadgeTable() {
                     <TableRow
                       hover
                       className={classes.tableRow}
-                      onClick={event => handleClick(event, achivement.name)}
+                      onClick={(event) => handleClick(event, achivement.name)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
@@ -274,7 +274,7 @@ export default function BadgeTable() {
                       <TableCell padding="checkbox">
                         <Checkbox
                           checked={isItemSelected}
-                          inputProps={{ 'aria-labelledby': labelId }}
+                          inputProps={{ "aria-labelledby": labelId }}
                         />
                       </TableCell>
                       <TableCell
@@ -295,7 +295,7 @@ export default function BadgeTable() {
                       <TableCell align="right">{achivement.xp}</TableCell>
                     </TableRow>
                   );
-                },
+                }
               )}
             </TableBody>
           </Table>
