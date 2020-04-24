@@ -16,7 +16,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import { readString } from "react-papaparse";
 import useLocalStorage from "./StorageHook";
 
-import csvFile from "../achivements.csv";
+import csvFile from "../data/achivements.csv";
 
 const csvData = readString(csvFile, {
   header: true,
