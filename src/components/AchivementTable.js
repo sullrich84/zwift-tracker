@@ -79,7 +79,7 @@ function EnhancedPageHead(props) {
     <div>
       <Toolbar>
         <Typography variant="h6" id="tableTitle" component="div">
-          Zwift Route Badges
+          Zwift Tracker
           <Typography variant="subtitle1">
             {props.courses} {props.courses === 1 ? "badge" : "badges"}
             {" unlocked "}
@@ -96,9 +96,9 @@ function EnhancedPageHead(props) {
 }
 
 EnhancedPageHead.propTypes = {
-  courses: PropTypes.object.isRequired,
-  totalXp: PropTypes.object.isRequired,
-  xp: PropTypes.object.isRequired,
+  courses: PropTypes.number.isRequired,
+  totalXp: PropTypes.number.isRequired,
+  xp: PropTypes.number.isRequired,
 };
 
 function EnhancedTableHead(props) {
@@ -142,7 +142,6 @@ EnhancedTableHead.propTypes = {
   classes: PropTypes.object.isRequired,
   numSelected: PropTypes.number.isRequired,
   onRequestSort: PropTypes.func.isRequired,
-  onSelectAllClick: PropTypes.func.isRequired,
   order: PropTypes.oneOf(["asc", "desc"]).isRequired,
   orderBy: PropTypes.string.isRequired,
   rowCount: PropTypes.number.isRequired,
@@ -180,10 +179,9 @@ const useStyles = makeStyles((theme) => ({
 export default function AchivementTable(props) {
   const { data } = props;
   const classes = useStyles();
-  const [order, setOrder] = React.useState("asc");
-  const [orderBy, setOrderBy] = React.useState();
+  const [order, setOrder] = useLocalStorage("order", "desc");
+  const [orderBy, setOrderBy] = useLocalStorage("orderBy", "xp");
   const [selected, setSelected] = useLocalStorage("selection", []);
-  const [dense] = React.useState(false);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -213,7 +211,6 @@ export default function AchivementTable(props) {
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
   const courses = selected.length;
-
   const totalXp = data.reduce((tXp, achmnt) => tXp + achmnt.xp, 0);
   const xp = data
     .filter((achmnt) => isSelected(achmnt.name))
@@ -231,9 +228,8 @@ export default function AchivementTable(props) {
 
         <TableContainer>
           <Table
-            className={classes}
             aria-labelledby="tableTitle"
-            size={dense ? "small" : "medium"}
+            size="medium"
             aria-label="enhanced table"
           >
             <EnhancedTableHead
