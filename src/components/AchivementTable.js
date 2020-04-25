@@ -7,6 +7,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
+import Hidden from "@material-ui/core/Hidden";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -83,7 +84,7 @@ function EnhancedPageHead(props) {
         <Typography variant="h6" id="tableTitle" component="div">
           Zwift Tracker
         </Typography>
-        <Typography className={props.classes.pageHead}>
+        <div className={props.classes.pageHead}>
           <Chip
             size="small"
             color="primary"
@@ -98,7 +99,7 @@ function EnhancedPageHead(props) {
             avatar={<Avatar>XP</Avatar>}
             label={`${props.xp} of ${props.totalXp}`}
           />
-        </Typography>
+        </div>
       </Toolbar>
       <LinearProgress
         variant="determinate"
@@ -202,6 +203,11 @@ const useStyles = makeStyles((theme) => ({
     top: 20,
     width: 1,
   },
+  wrapIcon: {
+    verticalAlign: "middle",
+    display: "inline-flex",
+    marginRight: theme.spacing(1),
+  },
 }));
 
 export default function AchivementTable(props) {
@@ -300,14 +306,26 @@ export default function AchivementTable(props) {
                         padding="none"
                       >
                         {achivement.name}
+                        <br />
+                        <Hidden lgUp>
+                          <small>{achivement.world}</small>
+                        </Hidden>
                       </TableCell>
-                      <TableCell>{achivement.world}</TableCell>
+                      <Hidden mdDown>
+                        <TableCell>{achivement.world}</TableCell>
+                      </Hidden>
                       <TableCell align="right">
                         {achivement.distance}km
+                        <br />
+                        <Hidden lgUp>
+                          <small>{achivement.elevation}m</small>
+                        </Hidden>
                       </TableCell>
-                      <TableCell align="right">
-                        {achivement.elevation}m
-                      </TableCell>
+                      <Hidden mdDown>
+                        <TableCell align="right">
+                          {achivement.elevation}m
+                        </TableCell>
+                      </Hidden>
                       <TableCell align="right">{achivement.xp}</TableCell>
                     </TableRow>
                   );
