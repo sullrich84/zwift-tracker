@@ -7,6 +7,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "serve": "react-scripts build && serve -s build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
@@ -19,6 +20,9 @@
     "react-dom": "16.13.1",
     "react-papaparse": "3.1.0",
     "react-scripts": "latest"
+  },
+  "devDependencies": {
+    "serve": "^11.3.0"
   },
   "browserslist": {
     "production": [

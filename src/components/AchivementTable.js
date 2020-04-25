@@ -13,18 +13,7 @@ import Typography from "@material-ui/core/Typography";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import Paper from "@material-ui/core/Paper";
 import Checkbox from "@material-ui/core/Checkbox";
-import { readString } from "react-papaparse";
 import useLocalStorage from "./StorageHook";
-
-import csvFile from "../data/achivements.csv";
-
-const csvData = readString(csvFile, {
-  header: true,
-  delimiter: ", ",
-  dynamicTyping: true,
-});
-
-const data = csvData.data;
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -188,11 +177,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function BadgeTable() {
+export default function AchivementTable(props) {
+  const { data } = props;
   const classes = useStyles();
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState();
-  const [selected, setSelected] = useLocalStorage("selection", {});
+  const [selected, setSelected] = useLocalStorage("selection", []);
   const [dense] = React.useState(false);
 
   const handleRequestSort = (event, property) => {
