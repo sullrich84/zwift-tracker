@@ -295,6 +295,19 @@ export default function AchivementTable(props) {
           </Table>
         </TableContainer>
       </Paper>
+      <Typography>
+        <small>
+          Developed and maintained by Sebastian Ullrich.
+          <br />
+          <a
+            href="https://github.com/sullrich84/zwift-tracker"
+            data-ribbon="Fork me on GitHub"
+            title="Fork me on GitHub"
+          >
+            Fork Zwift Tracker on GitHub
+          </a>
+        </small>
+      </Typography>
     </div>
   );
 }
