@@ -44,39 +44,6 @@ function stableSort(array, comparator) {
   return stabilizedThis.map((el) => el[0]);
 }
 
-const headCells = [
-  {
-    id: "name",
-    numeric: false,
-    disablePadding: true,
-    label: "Course",
-  },
-  {
-    id: "world",
-    numeric: false,
-    disablePadding: false,
-    label: "World",
-  },
-  {
-    id: "distance",
-    numeric: true,
-    disablePadding: false,
-    label: "Distance",
-  },
-  {
-    id: "elevation",
-    numeric: true,
-    disablePadding: false,
-    label: "Elevation",
-  },
-  {
-    id: "xp",
-    numeric: true,
-    disablePadding: false,
-    label: "XP",
-  },
-];
-
 function EnhancedPageHead(props) {
   return (
     <div>
@@ -122,50 +89,54 @@ EnhancedPageHead.propTypes = {
   xp: PropTypes.number.isRequired,
 };
 
-function EnhancedTableHead(props) {
-  const { classes, order, orderBy, onRequestSort } = props;
+function EnhancedTableHeadCell(props) {
+  const {
+    id,
+    classes,
+    numeric,
+    disablePadding,
+    order,
+    orderBy,
+    onRequestSort,
+    label,
+  } = props;
 
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
 
   return (
-    <TableHead>
-      <TableRow>
-        <TableCell padding="checkbox" />
-        {headCells.map((headCell) => (
-          <TableCell
-            key={headCell.id}
-            align={headCell.numeric ? "right" : "left"}
-            padding={headCell.disablePadding ? "none" : "default"}
-            sortDirection={orderBy === headCell.id ? order : false}
-          >
-            <TableSortLabel
-              active={orderBy === headCell.id}
-              direction={orderBy === headCell.id ? order : "asc"}
-              onClick={createSortHandler(headCell.id)}
-            >
-              {headCell.label}
-              {orderBy === headCell.id ? (
-                <span className={classes.visuallyHidden}>
-                  {order === "desc" ? "sorted descending" : "sorted ascending"}
-                </span>
-              ) : null}
-            </TableSortLabel>
-          </TableCell>
-        ))}
-      </TableRow>
-    </TableHead>
+    <TableCell
+      key={id}
+      align={numeric ? "right" : "left"}
+      padding={disablePadding ? "none" : "default"}
+      sortDirection={orderBy === id ? order : false}
+    >
+      <TableSortLabel
+        active={orderBy === id}
+        direction={orderBy === id ? order : "asc"}
+        onClick={createSortHandler(id)}
+      >
+        {label}
+        {orderBy === id ? (
+          <span className={classes.visuallyHidden}>
+            {order === "desc" ? "sorted descending" : "sorted ascending"}
+          </span>
+        ) : null}
+      </TableSortLabel>
+    </TableCell>
   );
 }
 
-EnhancedTableHead.propTypes = {
+EnhancedTableHeadCell.propTypes = {
+  id: PropTypes.string.isRequired,
   classes: PropTypes.object.isRequired,
-  numSelected: PropTypes.number.isRequired,
-  onRequestSort: PropTypes.func.isRequired,
+  numeric: PropTypes.bool.isRequired,
+  disablePadding: PropTypes.bool.isRequired,
   order: PropTypes.oneOf(["asc", "desc"]).isRequired,
   orderBy: PropTypes.string.isRequired,
-  rowCount: PropTypes.number.isRequired,
+  onRequestSort: PropTypes.func.isRequired,
+  label: PropTypes.number.isRequired,
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -268,14 +239,66 @@ export default function AchivementTable(props) {
             size="medium"
             aria-label="enhanced table"
           >
-            <EnhancedTableHead
-              classes={classes}
-              numSelected={selected.length}
-              order={order}
-              orderBy={orderBy}
-              onRequestSort={handleRequestSort}
-              rowCount={data.length}
-            />
+            <TableHead>
+              <TableRow>
+                <TableCell padding="checkbox" />
+                <EnhancedTableHeadCell
+                  id="name"
+                  classes={classes}
+                  numeric={false}
+                  disablePadding={true}
+                  order={order}
+                  orderBy={orderBy}
+                  onRequestSort={handleRequestSort}
+                  label="Course"
+                />
+                <Hidden mdDown>
+                  <EnhancedTableHeadCell
+                    id="world"
+                    classes={classes}
+                    numeric={false}
+                    disablePadding={false}
+                    order={order}
+                    orderBy={orderBy}
+                    onRequestSort={handleRequestSort}
+                    label="World"
+                  />
+                </Hidden>
+                <EnhancedTableHeadCell
+                  id="distance"
+                  classes={classes}
+                  numeric={true}
+                  disablePadding={false}
+                  order={order}
+                  orderBy={orderBy}
+                  onRequestSort={handleRequestSort}
+                  label="Distance"
+                />
+                <Hidden mdDown>
+                  <EnhancedTableHeadCell
+                    id="elevation"
+                    classes={classes}
+                    numeric={true}
+                    disablePadding={false}
+                    order={order}
+                    orderBy={orderBy}
+                    onRequestSort={handleRequestSort}
+                    label="Elevation"
+                  />
+                </Hidden>
+                <EnhancedTableHeadCell
+                  id="xp"
+                  classes={classes}
+                  numeric={true}
+                  disablePadding={false}
+                  order={order}
+                  orderBy={orderBy}
+                  onRequestSort={handleRequestSort}
+                  label="XP"
+                />
+              </TableRow>
+            </TableHead>
+
             <TableBody>
               {stableSort(data, getComparator(order, orderBy)).map(
                 (achivement, index) => {
