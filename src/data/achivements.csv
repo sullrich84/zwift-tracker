@@ -1,68 +1,68 @@
-name, world, distance, elevation, xp
-Volcano Circuit CCW, Watopia, 4.1, 17, 80
-Volcano Circuit, Watopia, 4, 17, 80
-Queen's Highway, Yorkshire, 3, 37, 60
-Duchy Estate, Yorkshire, 3, 37, 60
-Prefer Flat Roads, Richmond, 5, 13, 100
-Classique, London, 5.4 , 19, 110
-The 6 Train, New York, 6.4, 61, 130
-Jungle Circuit, Watopia, 7.9, 79, 260
-Innsbruckring, Innsbruck, 8.8, 72, 170
-Flat Route, Watopia, 10.3, 54, 200
-Greater London Flat, London, 11.6, 45, 230
-Volcano Flat, Watopia, 12.3, 46, 240
-Hilly Route, Watopia, 9.1, 100, 180
-Park Perimeter Loop, New York, 9.7, 120, 190
-Grand Central Circuit, New York, 6.8, 137, 140
-Tempus Fugit, Watopia, 17.3, 16, 380
-Prefer Hilly Roads, Richmond, 9.2, 126, 180
-Tick Tock, Watopia, 16.8, 44, 380
-Astoria Line 8, New York, 11.5, 129, 230
-Whole Lotta Lava, Watopia, 12.3, 153, 240
-The Highline, New York, 10.5, 175, 210
-Tour of Tewit Well, Yorkshire, 10.4, 200, 210
-2015 UCI Worlds Course, Richmond, 16.3, 142, 320
-Lady Liberty, New York, 12.3, 197, 240
-Sand and Sequoias, Watopia, 20.2, 147, 400
-2019 UCI Worlds Harrogate Circuit, Yorkshire, 13.8, 240, 270
-London Loop, London, 14.9, 220, 300
-Greatest London Flat, London, 23.6, 147, 500
-Volcano Climb, Watopia, 22.8, 192, 460
-London 8, London, 20.3, 238, 410
-Greater London Loop, London, 21, 244, 420
-Greater London 8, London, 23.8, 256, 480
-Mighty Metropolitan, New York, 20.0, 307, 400
-Figure 8 Reverse, Watopia, 29.8, 234, 580
-Figure 8, Watopia, 29.8, 234, 580
-Road to Ruins, Watopia, 29.6, 268, 580
-Knickerbocker Reverse, New York, 22.5, 346, 450
-Knickerbocker, New York, 22.5, 346, 450
-Rising Empire, New York, 20.7, 362, 410
-Greatest London Loop, London, 25.6, 345, 510
-Out and Back Again, Watopia, 39.8, 303, 840
-2018 UCI Worlds Course Short Lap, Innsbruck, 23.6, 487, 470
-Royal Pump Room 8, Yorkshire, 27.2, 480, 550
-Everything Bagel, New York, 34.2, 525, 690
-Triple Loops, London, 40.8, 544, 810
-Mountain Route, Watopia, 29.5, 671, 580
-Big Loop, Watopia, 42.4, 651, 840
-Dust In the Wind, Watopia, 54.6, 529, 1080
-Lutscher, Innsbruck, 24.2, 823, 270
-The London Pretzel, London, 55.6, 531, 1100
-Muir and the Mountain, Watopia, 33.9, 767, 680
-Mountain 8, Watopia, 32, 677, 640
-Bigger Loop, Watopia, 53.1, 678, 1060
-Lutscher CCW, Innsbruck, 22.3, 821, 240
-Surrey Hills, London, 44.1, 1029, 820
-Big Foot Hills, Watopia, 67.5, 637, 1340
-Three Sisters, Watopia, 47.8, 879, 950
-Road to Sky, Watopia, 17.3, 1045, 380
-Achterbahn, Innsbruck, 47.38, 973, 950
-Tour of Fire and Ice, Watopia, 25, 1161, 500
-The PRL Half, London, 69, 954, 1380
-The Pretzel, Watopia, 72.2, 1333, 1440
-Quatch Quest, Watopia, 45.9, 1683, 920
-The Mega Pretzel, Watopia, 107, 1642, 2140
-Four Horsemen, Watopia, 89.3, 2112, 1780
-The Über Pretzel, Watopia, 128.3, 2335, 2560
-The PRL Full, London, 173, 2496, 3460
+name, world, distance, elevation, xp, arches
+Volcano Circuit CCW, Watopia, 4.1, 17, 80, 0
+Volcano Circuit, Watopia, 4, 17, 80, 0
+Queen's Highway, Yorkshire, 3, 37, 60, 0
+Duchy Estate, Yorkshire, 3, 37, 60, 0
+Prefer Flat Roads, Richmond, 5, 13, 100, 0
+Classique, London, 5.4 , 19, 110, 0
+The 6 Train, New York, 6.4, 61, 130, 0
+Jungle Circuit, Watopia, 7.9, 79, 260, 0
+Innsbruckring, Innsbruck, 8.8, 72, 170, 0
+Flat Route, Watopia, 10.3, 54, 200, 0
+Greater London Flat, London, 11.6, 45, 230, 0
+Volcano Flat, Watopia, 12.3, 46, 240, 0
+Hilly Route, Watopia, 9.1, 100, 180, 0
+Park Perimeter Loop, New York, 9.7, 120, 190, 0
+Grand Central Circuit, New York, 6.8, 137, 140, 0
+Tempus Fugit, Watopia, 17.3, 16, 380, 0
+Prefer Hilly Roads, Richmond, 9.2, 126, 180, 0
+Tick Tock, Watopia, 16.8, 44, 380, 0
+Astoria Line 8, New York, 11.5, 129, 230, 0
+Whole Lotta Lava, Watopia, 12.3, 153, 240, 0
+The Highline, New York, 10.5, 175, 210, 0
+Tour of Tewit Well, Yorkshire, 10.4, 200, 210, 0
+2015 UCI Worlds Course, Richmond, 16.3, 142, 320, 0
+Lady Liberty, New York, 12.3, 197, 240, 0
+Sand and Sequoias, Watopia, 20.2, 147, 400, 0
+2019 UCI Worlds Harrogate Circuit, Yorkshire, 13.8, 240, 270, 0
+London Loop, London, 14.9, 220, 300, 0
+Greatest London Flat, London, 23.6, 147, 500, 0
+Volcano Climb, Watopia, 22.8, 192, 460, 0
+London 8, London, 20.3, 238, 410, 0
+Greater London Loop, London, 21, 244, 420, 0
+Greater London 8, London, 23.8, 256, 480, 0
+Mighty Metropolitan, New York, 20.0, 307, 400, 0
+Figure 8 Reverse, Watopia, 29.8, 234, 580, 0
+Figure 8, Watopia, 29.8, 234, 580, 0
+Road to Ruins, Watopia, 29.6, 268, 580, 0
+Knickerbocker Reverse, New York, 22.5, 346, 450, 0
+Knickerbocker, New York, 22.5, 346, 450, 0
+Rising Empire, New York, 20.7, 362, 410, 0
+Greatest London Loop, London, 25.6, 345, 510, 0
+Out and Back Again, Watopia, 39.8, 303, 840, 0
+2018 UCI Worlds Course Short Lap, Innsbruck, 23.6, 487, 470, 0
+Royal Pump Room 8, Yorkshire, 27.2, 480, 550, 0
+Everything Bagel, New York, 34.2, 525, 690, 0
+Triple Loops, London, 40.8, 544, 810, 0
+Mountain Route, Watopia, 29.5, 671, 580, 0
+Big Loop, Watopia, 42.4, 651, 840, 0
+Dust In the Wind, Watopia, 54.6, 529, 1080, 0
+Lutscher, Innsbruck, 24.2, 823, 270, 0
+The London Pretzel, London, 55.6, 531, 1100, 0
+Muir and the Mountain, Watopia, 33.9, 767, 680, 0
+Mountain 8, Watopia, 32, 677, 640, 0
+Bigger Loop, Watopia, 53.1, 678, 1060, 0
+Lutscher CCW, Innsbruck, 22.3, 821, 240, 0
+Surrey Hills, London, 44.1, 1029, 820, 0
+Big Foot Hills, Watopia, 67.5, 637, 1340, 0
+Three Sisters, Watopia, 47.8, 879, 950, 0
+Road to Sky, Watopia, 17.3, 1045, 380, 0
+Achterbahn, Innsbruck, 47.38, 973, 950, 0
+Tour of Fire and Ice, Watopia, 25, 1161, 500, 0
+The PRL Half, London, 69, 954, 1380, 0
+The Pretzel, Watopia, 72.2, 1333, 1440, 0
+Quatch Quest, Watopia, 45.9, 1683, 920, 0
+The Mega Pretzel, Watopia, 107, 1642, 2140, 0
+Four Horsemen, Watopia, 89.3, 2112, 1780, 0
+The Über Pretzel, Watopia, 128.3, 2335, 2560, 0
+The PRL Full, London, 173, 2496, 3460, 0
