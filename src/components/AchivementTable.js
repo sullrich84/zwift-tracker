@@ -13,6 +13,8 @@ import Typography from "@material-ui/core/Typography";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import Paper from "@material-ui/core/Paper";
 import Checkbox from "@material-ui/core/Checkbox";
+import Avatar from "@material-ui/core/Avatar";
+import Chip from "@material-ui/core/Chip";
 import useLocalStorage from "./StorageHook";
 
 function descendingComparator(a, b, orderBy) {
@@ -80,21 +82,33 @@ function EnhancedPageHead(props) {
       <Toolbar>
         <Typography variant="h6" id="tableTitle" component="div">
           Zwift Tracker
-          <Typography variant="subtitle1">
-            {props.courses} {props.courses === 1 ? "badge" : "badges"}
-            {" unlocked "}
-          </Typography>
+        </Typography>
+        <Typography className={props.classes.pageHead}>
+          <Chip
+            size="small"
+            color="primary"
+            variant="outlined"
+            avatar={<Avatar>C</Avatar>}
+            label={`${props.courses} of ${props.totalCourses}`}
+          />
+          <Chip
+            size="small"
+            color="secondary"
+            variant="outlined"
+            avatar={<Avatar>XP</Avatar>}
+            label={`${props.xp} of ${props.totalXp}`}
+          />
         </Typography>
       </Toolbar>
       <LinearProgress
         variant="determinate"
-        color="secondary"
-        value={(props.xp / props.totalXp) * 100}
+        color="primary"
+        value={(props.courses / props.totalCourses) * 100}
       />
       <LinearProgress
         variant="determinate"
-        color="primary"
-        value={(props.courses / props.totalCourses) * 100}
+        color="secondary"
+        value={(props.xp / props.totalXp) * 100}
       />
     </div>
   );
@@ -158,6 +172,14 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     paddingTop: 15,
     paddingBottom: 15,
+  },
+  pageHead: {
+    display: "flex",
+    justifyContent: "center",
+    flexWrap: "wrap",
+    "& > *": {
+      margin: theme.spacing(0.5),
+    },
   },
   paper: {
     maxWidth: 1060,
@@ -227,7 +249,7 @@ export default function AchivementTable(props) {
     <div className={classes.root}>
       <Paper elevation={3} className={classes.paper}>
         <EnhancedPageHead
-          className={classes.pageHead}
+          classes={classes}
           totalCourses={totalCourses}
           courses={courses}
           totalXp={totalXp}
