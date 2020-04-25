@@ -25,7 +25,7 @@ function App() {
   return (
     <Container maxWidth="md">
       <CssBaseline />
-      {data ? <AchivementTable data={data} /> : <code>Loading</code>}
+      {data ? <AchivementTable data={data} /> : <code>Loading...</code>}
     </Container>
   );
 }

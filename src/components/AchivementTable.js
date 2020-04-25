@@ -91,11 +91,17 @@ function EnhancedPageHead(props) {
         color="secondary"
         value={(props.xp / props.totalXp) * 100}
       />
+      <LinearProgress
+        variant="determinate"
+        color="primary"
+        value={(props.courses / props.totalCourses) * 100}
+      />
     </div>
   );
 }
 
 EnhancedPageHead.propTypes = {
+  totalCourses: PropTypes.number.isRequired,
   courses: PropTypes.number.isRequired,
   totalXp: PropTypes.number.isRequired,
   xp: PropTypes.number.isRequired,
@@ -210,6 +216,7 @@ export default function AchivementTable(props) {
   };
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
+  const totalCourses = data.length;
   const courses = selected.length;
   const totalXp = data.reduce((tXp, achmnt) => tXp + achmnt.xp, 0);
   const xp = data
@@ -221,6 +228,7 @@ export default function AchivementTable(props) {
       <Paper elevation={3} className={classes.paper}>
         <EnhancedPageHead
           className={classes.pageHead}
+          totalCourses={totalCourses}
           courses={courses}
           totalXp={totalXp}
           xp={xp}
