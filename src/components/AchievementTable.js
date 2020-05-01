@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, fade } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -16,7 +16,10 @@ import Paper from "@material-ui/core/Paper";
 import Checkbox from "@material-ui/core/Checkbox";
 import Avatar from "@material-ui/core/Avatar";
 import Chip from "@material-ui/core/Chip";
+import InputBase from '@material-ui/core/InputBase';
+import SearchIcon from '@material-ui/icons/Search';
 import useLocalStorage from "./StorageHook";
+import { useDebounce } from "./useDebounce";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -67,6 +70,21 @@ function EnhancedPageHead(props) {
             label={`${props.xp} of ${props.totalXp}`}
           />
         </div>
+        <div className={props.classes.search}>
+            <div className={props.classes.searchIcon}>
+              <SearchIcon />
+            </div>
+            <InputBase
+              value={props.search}
+              onChange={(event) => props.onChangeSearch(event.target.value)}
+              placeholder="Search Course"
+              classes={{
+                root: props.classes.inputRoot,
+                input: props.classes.inputInput,
+              }}
+              inputProps={{ 'aria-label': 'search' }}
+            />
+          </div>
       </Toolbar>
       <LinearProgress
         variant="determinate"
@@ -87,6 +105,8 @@ EnhancedPageHead.propTypes = {
   courses: PropTypes.number.isRequired,
   totalXp: PropTypes.number.isRequired,
   xp: PropTypes.number.isRequired,
+  search: PropTypes.string.isRequired,
+  onChangeSearch: PropTypes.func.isRequired,
 };
 
 function EnhancedTableHeadCell(props) {
@@ -136,7 +156,7 @@ EnhancedTableHeadCell.propTypes = {
   order: PropTypes.oneOf(["asc", "desc"]).isRequired,
   orderBy: PropTypes.string.isRequired,
   onRequestSort: PropTypes.func.isRequired,
-  label: PropTypes.number.isRequired,
+  label: PropTypes.string.isRequired,
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -147,7 +167,8 @@ const useStyles = makeStyles((theme) => ({
   },
   pageHead: {
     display: "flex",
-    justifyContent: "center",
+    flexGrow: 1,
+    justifyContent: "'flex-start',",
     flexWrap: "wrap",
     "& > *": {
       margin: theme.spacing(0.5),
@@ -179,22 +200,74 @@ const useStyles = makeStyles((theme) => ({
     display: "inline-flex",
     marginRight: theme.spacing(1),
   },
+  search: {
+    position: 'relative',
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: fade(theme.palette.grey[400], 0.15),
+    '&:hover': {
+      backgroundColor: fade(theme.palette.grey[400], 0.25),
+    },
+    marginLeft: 0,
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      marginLeft: theme.spacing(1),
+      width: 'auto',
+    },
+  },
+  searchIcon: {
+    padding: theme.spacing(0, 2),
+    height: '100%',
+    position: 'absolute',
+    pointerEvents: 'none',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: theme.palette.primary.light,
+  },
+  inputRoot: {
+    color: 'inherit',
+  },
+  inputInput: {
+    padding: theme.spacing(1, 1, 1, 0),
+    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      width: '12ch',
+      '&:focus': {
+        width: '20ch',
+      },
+    },
+  },
 }));
 
-export default function AchivementTable(props) {
+export default function AchievementTable(props) {
   const { data } = props;
   const classes = useStyles();
   const [order, setOrder] = useLocalStorage("order", "desc");
   const [orderBy, setOrderBy] = useLocalStorage("orderBy", "xp");
   const [selected, setSelected] = useLocalStorage("selection", []);
+  const [search, setSearch] = useLocalStorage('search', '');
+  const debouncedSearch = useDebounce(search, 300);
 
-  const handleRequestSort = (event, property) => {
+  const handleRequestSort = React.useCallback((event, property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
-  };
+  }, [setOrder, setOrderBy, orderBy, order]);
 
-  const handleClick = (event, name) => {
+  const filteredData = React.useMemo(() => {
+    if (debouncedSearch !== '') {
+      return data.filter(course => {
+        return course.name.toLowerCase().includes(debouncedSearch.toLowerCase()) 
+          || course.world.toLowerCase().includes(debouncedSearch.toLowerCase());
+      });
+    }
+
+    return data;
+  }, [debouncedSearch, data])
+
+  const handleClick = React.useCallback((event, name) => {
     const selectedIndex = selected.indexOf(name);
     let newSelected = [];
 
@@ -212,15 +285,15 @@ export default function AchivementTable(props) {
     }
 
     setSelected(newSelected);
-  };
+  }, [selected, setSelected]);
 
-  const isSelected = (name) => selected.indexOf(name) !== -1;
-  const totalCourses = data.length;
+  const isSelected = React.useCallback((name) => selected.indexOf(name) !== -1, [selected]);
+  const totalCourses = filteredData.length;
   const courses = selected.length;
-  const totalXp = data.reduce((tXp, achmnt) => tXp + achmnt.xp, 0);
-  const xp = data
+  const totalXp = React.useMemo(() => filteredData.reduce((tXp, achmnt) => tXp + achmnt.xp, 0), [filteredData]);
+  const xp = React.useMemo(() => filteredData
     .filter((achmnt) => isSelected(achmnt.name))
-    .reduce((tXp, achmnt) => tXp + achmnt.xp, 0);
+    .reduce((tXp, achmnt) => tXp + achmnt.xp, 0), [filteredData, isSelected]);
 
   return (
     <div className={classes.root}>
@@ -231,6 +304,8 @@ export default function AchivementTable(props) {
           courses={courses}
           totalXp={totalXp}
           xp={xp}
+          search={search}
+          onChangeSearch={setSearch}
         />
 
         <TableContainer>
@@ -300,7 +375,7 @@ export default function AchivementTable(props) {
             </TableHead>
 
             <TableBody>
-              {stableSort(data, getComparator(order, orderBy)).map(
+              {stableSort(filteredData, getComparator(order, orderBy)).map(
                 (achivement, index) => {
                   const isItemSelected = isSelected(achivement.name);
                   const labelId = `enhanced-table-checkbox-${index}`;

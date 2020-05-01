@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import AchivementTable from "./components/AchivementTable";
+import AchievementTable from "./components/AchievementTable";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
-import csvFile from "./data/achivements.csv";
+import csvFile from "./data/achievements.csv";
 import { readString } from "react-papaparse";
 
 function App() {
@@ -25,7 +25,7 @@ function App() {
   return (
     <Container maxWidth="md">
       <CssBaseline />
-      {data ? <AchivementTable data={data} /> : <code>Loading...</code>}
+      {data ? <AchievementTable data={data} /> : <code>Loading...</code>}
     </Container>
   );
 }
