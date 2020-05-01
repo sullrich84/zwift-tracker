@@ -241,7 +241,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function AchivementTable(props) {
+export default function AchievementTable(props) {
   const { data } = props;
   const classes = useStyles();
   const [order, setOrder] = useLocalStorage("order", "desc");
